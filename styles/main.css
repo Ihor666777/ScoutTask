@@ -53,6 +53,10 @@ li {
   bottom: 30px;
 }
 
+.light {
+	background-color: yellow;
+}
+
 @media screen and (max-width: 450px) {
 	#outPut {
 		width: 100%;

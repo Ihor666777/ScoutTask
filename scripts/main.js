@@ -33,7 +33,7 @@ fetch(url)
 function findMatches(word, trnm_list) {
   return trnm_list.filter(info => {
     const regex = new RegExp(word, "gi")
-    return info.startTime.match(regex) || info.buyIn.match(regex);
+    return info.gameType.match(regex) || info.buyIn.match(regex);
   })
 }
 
@@ -42,13 +42,16 @@ function findMatches(word, trnm_list) {
 function displVal () {
   const ourArr = findMatches(this.value, trnm_list);
   const display = ourArr.map(newTrnm => {
+    const newRegex = new RegExp(this.value, "gi");
+    const tournament = newTrnm.buyIn.replace(newRegex, `<span class="light">${this.value}</span>`);
+    const gameType = newTrnm.gameType.replace(newRegex, `<span class="light">${this.value}</span>`);
     return `
       <div class="trnm">
         <li><span>Gameweek: <b>${newTrnm.gameweeks}</b></span></li>
         <li><span>GW length: <b>${newTrnm.gameweeks.length}</b></span></li>
-        <li><span>Gamet type: <b>${newTrnm.gameType}</b></span></li>
+        <li><span>Gamet type: <b>${gameType}</b></span></li>
         <li><span>Date: <b id="date_time">${moment(newTrnm.startTime).format("LLL")}</b></span></li>
-        <span id="buyIn"><b>Buy In: <button>${newTrnm.buyIn} $</b></button></span></div>
+        <span id="buyIn"><b>Buy In: <button>${tournament} $</b></button></span></div>
       </div>`;
   }).join("")
    document.getElementById("render").innerHTML = display;  
