@@ -28,7 +28,7 @@ fetch(url)
   }   
 })
 
-// Filter array by date and buyIn //
+// Filter array by game type and buyIn //
 
 function findMatches(word, trnm_list) {
   return trnm_list.filter(info => {
