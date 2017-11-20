@@ -7,7 +7,8 @@ body {
 	background-color: #FBFBFB;
 }
 
-#outPut{
+#outPut {
+	min-width: 360px;
 	display: flex;
 	flex-direction: column;
 	align-items:center;
@@ -57,8 +58,24 @@ li {
 	background-color: yellow;
 }
 
-button:hover {
+.buyIn:hover {
 	transform: translateY(-3px);
+	cursor: pointer;
+}
+
+.pagin_btn {
+	cursor: pointer;
+  margin: 20px 5px 50px 2px;
+  padding: 4px 12px;
+  font-size: 17px;
+}
+
+#sportType {
+  font-size: 17px;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin-top: 5px;
+  padding: 3px 10px;
 }
 
 @media only screen and (max-width: 450px) {

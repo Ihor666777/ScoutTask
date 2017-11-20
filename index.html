@@ -10,7 +10,18 @@
     <div id="outPut">
       <h1>Tournaments</h1> 
       <input type="text" id="filter">
+      <select id="sportType" onchange="sportType()">
+        <option value="football">Football</option>
+        <option value="hockey">Hockey</option>
+        <option value="basket">Basketball</option>
+      </select>
       <div id="render"></div>
+      <div class="pagin">
+        <button class=pagin_btn>1</button>
+        <button class=pagin_btn>2</button>
+        <button class=pagin_btn>3</button>
+        <button class=pagin_btn>4</button>
+      </div>
     </div>
 	</body>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
