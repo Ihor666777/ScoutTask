@@ -23,7 +23,6 @@ class Tournaments {
   
   draw(data){
     return data.map( tournament => {
-     // console.log(tournament)
       return `<div class="trnm">
                 <li>Gameweek: <b>${tournament.matchColections[0].gameweeks}</b> </li>
                 <li>GW length: <b>${tournament.matchColections[0].gameweeks.length}</b> </li>
@@ -34,11 +33,14 @@ class Tournaments {
     })
   }
   
-  render(page){
+  render(page, input){
     return this.getTournaments(page)
       .then(data => {
-         console.log(data)
-         return data
+         return data.filter(info => {
+         const regex = new RegExp(input, "gi")
+           return info.buyIn.match(regex);
+      })
+      
     })
       .then(tournaments => {
          return this.draw(tournaments)
@@ -54,10 +56,14 @@ class Tournaments {
 
 const tournaments = new Tournaments(10)
 
-tournaments.render(0)
+tournaments.render(0, val())
 
+document.querySelector("#filter").addEventListener("keyup", val);
 
-
+function val() {
+  var x = document.querySelector("#filter").value
+  return x;
+}
 
 
 function findMatches(word, trnm_list) {
