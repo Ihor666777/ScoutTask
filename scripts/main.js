@@ -1,16 +1,92 @@
-let sportVal;
-const url = "https://ws.fanteam.com/match_collections?sport="+ sportVal+ "&tab=admin_created&statuses[]=waiting&page=0&per_page=30&bearer[white_label]=fanteam";
-const trnm_list = [];
-
-document.getElementById("sportType").value = "hockey"
-
-function sportType() {
-    sportVal = document.getElementById("sportType").value;
-    console.log(sportVal);
-    return sportVal;
+class Tournaments {
+  constructor(ipp) {
+    this.ipp = ipp
+  }
+  
+  makeUrl(page){
+    return `https://ws.fanteam.com/match_collections?sport=football&tab=admin_created&statuses[]=waiting&page=${page}&per_page=${this.ipp}&bearer[white_label]=fanteam`
+  }
+  
+  getTournaments(page){
+    return fetch(this.makeUrl(page))
+      .then(res => res.json())
+      .then(data => {
+        if(data && data.tournaments && data.matchCollections) {
+          return data.tournaments.map(trnmInfo => {
+            let matchColections = data.matchCollections.filter((colection)=>(colection.id === trnmInfo.matchCollectionId))
+            return Object.assign(trnmInfo, { matchColections })  
+          })
+        }
+        return []
+    })
+  }
+  
+  draw(data){
+    return data.map( tournament => {
+     // console.log(tournament)
+      return `<div class="trnm">
+                <li>Gameweek: <b>${tournament.matchColections[0].gameweeks}</b> </li>
+                <li>GW length: <b>${tournament.matchColections[0].gameweeks.length}</b> </li>
+                <li>Gamet type: <b>${tournament.gameType}</b> </li>
+                <li>Date: <b>${moment(tournament.matchColections[0].startTime).format("LLL")}</b> </li>
+                <span id="buyIn"> Buy In: <button><b>${tournament.buyIn}</b></button><span id="buyIn">
+              </div>`
+    })
+  }
+  
+  render(page){
+    return this.getTournaments(page)
+      .then(data => {
+         console.log(data)
+         return data
+    })
+      .then(tournaments => {
+         return this.draw(tournaments)
+    })
+      .then(data => data.join().replace(/<\/div>,/g , "<\/div>"))
+      .then(html => {
+         document.getElementById("render").innerHTML = html;
+      })
+    
+  }
 }
 
-// Fetching info from api and render it on the page //
+
+const tournaments = new Tournaments(10)
+
+tournaments.render(0)
+
+
+
+
+
+function findMatches(word, trnm_list) {
+  return trnm_list.filter(info => {
+    const regex = new RegExp(word, "gi")
+    return info.gameType.match(regex) || info.buyIn.match(regex);
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*let count = 0;
+const url = "https://ws.fanteam.com/match_collections?sport=football&tab=admin_created&statuses[]=waiting&page=" + count + "&per_page=3&bearer[white_label]=fanteam";
+const trnm_list = [];
+
+
 
 function getData() {
 fetch(url)
@@ -70,3 +146,22 @@ function displVal () {
 }
 
 document.querySelector("#filter").addEventListener("keyup", displVal);
+
+
+
+function sportType() {
+    sportVal = document.getElementById("sportType").value;
+    console.log(sportVal);
+    return sportVal;
+}
+
+function pageForward() {
+   count++
+   console.log(count)
+   getData()
+}
+
+document.getElementById("forward").addEventListener("click", pageForward)
+document.querySelector("#sportType").addEventListener("change", getData);
+document.querySelector("#sportType").addEventListener("change", sportType);
+*/
