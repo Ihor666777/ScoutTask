@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ScoutTask</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="styles/main.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/scout.png">
+  </head>
+	<body>
+    <div id="outPut">
+      <h1>Tournaments</h1> 
+      <input type="text" id="filter" placeholder="filter by: date & buyIn">
+      <form id = "settings">
+        <lable for="sportType"><b>Sport type:</b> <select id="sportType">
+          <option value="football">Football</option> 
+          <option value="basket">Basketball</option>
+          <option value="hockey">Hockey</option>
+        </select></lable>
+        <lable for="ipp"><b>Tournaments on page:</b> <input value ="10" type="number" id="ipp"/></lable>
+        <button id="settings_btn" type="button">Submit</button>
+      </form>
+      <div id="render"></div>
+      <div class="pagin">
+        <button class="pagin_btn" id="back"></button>
+        <button class="pagin_btn" id="next"></button>
+      </div>
+    </div>
+	</body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment.js"></script>
+	    <script src="scripts/constructor.js"></script>
+        <script src="scripts/settings.js"></script>
+</html>
