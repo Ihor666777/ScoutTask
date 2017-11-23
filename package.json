@@ -4,10 +4,18 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "gulp-install": "^1.1.0"
   },
   "devDependencies": {
-    "gulp-connect": "^5.0.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-connect": "^5.0.0",
+    "gulp-sequence": "^0.4.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
