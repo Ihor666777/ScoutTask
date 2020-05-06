@@ -7,4 +7,4 @@ Please, first install npm and gulp.
 * Clone this repo
 * open root folder in console
 * type `npm install` in console
-* type `gulp`
+* type `npm start`

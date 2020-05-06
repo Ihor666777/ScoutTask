@@ -29,7 +29,7 @@ class Tournaments {
                 <li>Gameweek: <b>${countGW}</b> </li>
                 <li>GW length: <b>${tournament.matchColections[0].gameweeks.length}</b> </li>
                 <li>Gamet type: <b>${tournament.gameType}</b> </li>
-                <li>Date: <b>${moment(tournament.matchColections[0].startTime).format("LLL")}</b> </li>
+                <li>Date: <b>${new Date(tournament.matchColections[0].startTime)}</b> </li>
                 <span id="buyIn"> Buy In: <button><b>${tournament.buyIn}</b></button></span>
               </div>`
     })
